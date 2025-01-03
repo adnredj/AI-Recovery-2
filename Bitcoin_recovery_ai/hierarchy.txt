@@ -1,0 +1,130 @@
+bitcoin_recovery_ai/
+├── config/
+│   ├── model_config.yaml          # Model configuration parameters
+│   ├── training_config.yaml       # Training parameters
+│   └── logging_config.yaml        # Logging configuration
+│
+├── data/
+│   ├── raw/                      # Raw training data
+│   │   ├── wallet_samples/       # Historical wallet.dat samples
+│   │   ├── bitcoin_source/       # Bitcoin Core source snapshots
+│   │   └── vulnerability_db/     # Known vulnerability database
+│   │
+│   ├── processed/               # Processed training data
+│   └── features/               # Extracted features
+│
+├── models/
+│   ├── architecture/
+│   │   ├── encoder.py          # Neural network encoder
+│   │   ├── decoder.py          # Neural network decoder
+│   │   └── attention.py        # Attention mechanisms
+│   │
+│   ├── components/
+│   │   ├── crypto_analyzer.py  # Cryptographic analysis module
+│   │   ├── pattern_detector.py # Pattern detection module
+│   │   └── key_recovery.py     # Key recovery module
+│   │
+│   └── saved/                  # Saved model checkpoints
+│
+├── src/
+│   ├── preprocessing/
+│   │   ├── wallet_parser.py    # Wallet.dat parsing
+│   │   ├── feature_extractor.py # Feature extraction
+│   │   └── data_cleaner.py     # Data cleaning utilities
+│   │
+│   ├── training/
+│   │   ├── trainer.py          # Training loop implementation
+│   │   ├── loss_functions.py   # Custom loss functions
+│   │   └── metrics.py          # Performance metrics
+│   │
+│   ├── utils/
+│   │   ├── crypto_utils.py     # Cryptographic utilities
+│   │   ├── db_utils.py         # Berkeley DB utilities
+│   │   └── gpu_utils.py        # GPU acceleration utilities
+│   │
+│   └── validation/
+│       ├── validator.py        # Model validation
+│       └── performance_metrics.py # Performance evaluation
+│
+├── tests/
+│   ├── unit/
+│   │   ├── test_wallet_parser.py
+│   │   ├── test_crypto_analyzer.py
+│   │   └── test_key_recovery.py
+│   │
+│   └── integration/
+│       └── test_full_recovery.py
+│
+├── notebooks/
+│   ├── data_analysis.ipynb
+│   ├── model_training.ipynb
+│   └── recovery_examples.ipynb
+│
+├── requirements.txt
+├── setup.py
+└── README.md
+
+
+
+
+I need you to help me create an autonomous AI model specialized in Bitcoin security, blockchain analysis, and wallet.dat recovery. The model should be designed with the following specifications:
+
+1. Core Competencies:
+- Deep understanding of Bitcoin Core's wallet.dat structure and encryption (2009-2024)
+- Blockchain security analysis and vulnerability detection
+- Cryptographic implementation weaknesses
+- Private key recovery techniques
+- Berkeley DB format analysis
+- Historical Bitcoin Core version-specific vulnerabilities
+
+2. Training Focus Areas:
+- Early Bitcoin Core implementations (2009-2012)
+   * Key derivation methods
+   * Encryption patterns
+   * Known vulnerabilities
+   * Wallet.dat structure variations
+
+- Cryptographic Methods:
+   * AES encryption implementations
+   * Key derivation functions
+   * Public/private key relationships
+   * Entropy analysis
+   * Salt and IV handling
+
+- Database Analysis:
+   * Berkeley DB format specifics
+   * Wallet.dat header structures
+   * Key pool implementations
+   * Backup format analysis
+
+3. Required Training Data:
+- Historical Bitcoin Core source code
+- Known vulnerability databases
+- Wallet.dat samples from different versions
+- Cryptographic implementation details
+- Recovery case studies
+
+4. Model Capabilities:
+- Autonomous vulnerability detection
+- Pattern recognition in encrypted data
+- Key derivation method identification
+- Entropy analysis
+- Structure analysis of wallet files
+- Recovery strategy development
+
+5. Implementation Requirements:
+- Python-based implementation
+- GPU acceleration support
+- Modular architecture for updates
+- Logging and analysis capabilities
+- Recovery validation methods
+
+Please provide:
+1. Initial model architecture
+2. Training methodology
+3. Required datasets
+4. Implementation steps
+5. Validation methods
+6. Performance metrics
+
+The model should be able to evolve and learn from new cases while maintaining expertise in historical Bitcoin Core implementations. Brake into multiple parts and files, be specify file names too and folder hirarchy

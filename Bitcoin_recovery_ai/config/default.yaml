@@ -1,0 +1,107 @@
+# Model configuration
+model:
+  path: "C:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/models/wallet_recovery_v1.pt"
+  type: "transformer"
+  embedding_dim: 256
+  num_heads: 8
+  num_layers: 6
+  dropout: 0.1
+  checkpoint_dir: "C:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/models/checkpoints"
+
+# Feature extraction configuration
+features:
+  structure_dim: 64
+  version_dim: 32
+  transaction_dim: 48
+  address_dim: 32
+  metadata_dim: 16
+  combine_features: true
+  cache_features: true
+  cache_dir: "c:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/cache"
+  window_size: 32
+  max_sequence_length: 1024
+
+# Training configuration
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  num_epochs: 100
+  validation_split: 0.2
+  early_stopping_patience: 10
+  checkpoint_frequency: 10
+  save_best: true
+  optimizer:
+    type: "adam"
+    weight_decay: 0.0001
+    beta1: 0.9
+    beta2: 0.999
+  scheduler:
+    type: "reduce_on_plateau"
+    patience: 5
+    factor: 0.5
+    min_lr: 0.00001
+  data:
+    train_dir: "c:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/data/train"
+    val_dir: "c:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/data/val"
+    augmentation: true
+    shuffle: true
+    num_workers: 4
+
+# Recovery configuration
+recovery:
+  type_confidence_threshold: 0.7
+  min_encryption_confidence: 0.8
+  enable_gpu: true
+  batch_size: 32
+  num_workers: 4
+  max_memory: "8G"
+  temp_dir: "c:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/temp"
+
+# Encryption detection
+encryption:
+  check_legacy: true
+  check_custom: true
+  min_strength: 128
+  patterns_file: "c:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/config/encryption_patterns.json"
+
+# Validation settings
+validation:
+  confidence_threshold: 0.8
+  max_attempts: 3
+  timeout: 300
+  save_checkpoints: true
+  checkpoint_interval: 60
+
+# Output configuration
+output:
+  save_results: true
+  output_dir: "c:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/results"
+  log_level: "INFO"
+  compress_results: true
+  max_file_size: "1G"
+
+# GPU configuration
+gpu:
+  use_gpu: true
+  memory_fraction: 0.8
+  gpu_id: 0
+  fallback_to_cpu: true
+  mixed_precision: true
+
+# Logging configuration
+logging:
+  level: "INFO"
+  save_dir: "c:/bitcoin_recovery/31k/expert/bitcoin_recovery_ai/logs"
+  enable_wandb: false
+  max_log_size: "100M"
+  backup_count: 5
+  log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Loss weights
+loss_weights:
+  recovery_type: 1.0
+  encryption_type: 1.0
+  encryption_prob: 0.5
+  confidence: 0.3
+  auth_requirements: 0.5
+  performance_requirements: 0.3

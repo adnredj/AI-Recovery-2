@@ -1,0 +1,32 @@
+Usage Examples:
+1. Training the model:
+
+# Train with new data
+python -m bitcoin_recovery_ai --mode train --train-data path/to/training/data --val-data path/to/validation/data
+
+# Train with custom configuration
+python -m bitcoin_recovery_ai --mode train --train-data path/to/data --config custom_config.yaml
+
+Recovering a wallet:
+# Basic recovery
+python -m bitcoin_recovery_ai --mode recover --wallet path/to/wallet.dat
+
+# Recovery with output saving
+python -m bitcoin_recovery_ai --mode recover --wallet path/to/wallet.dat --output results.yaml
+
+# Trigger autonomous improvement
+python -m bitcoin_recovery_ai --mode improve
+
+
+The system includes:
+1. Autonomous training capabilities
+Self-improvement mechanisms
+Neural network architecture (encoder-decoder with attention)
+4. Comprehensive metrics and validation
+Experience-based learning
+Automatic hyperparameter adjustment
+The model learns from:
+Training data (wallet samples)
+Recovery attempts (success/failure)
+Validation feedback
+Performance metrics

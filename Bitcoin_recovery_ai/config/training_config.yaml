@@ -1,0 +1,55 @@
+training:
+  # Data configuration
+  data:
+    train_path: "data/processed/train"
+    val_path: "data/processed/val"
+    test_path: "data/processed/test"
+    batch_size: 32
+    num_workers: 4
+    
+  # Optimizer configuration
+  optimizer:
+    type: "adam"
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    beta1: 0.9
+    beta2: 0.999
+    
+  # Learning rate scheduler
+  lr_scheduler:
+    type: "reduce_on_plateau"
+    patience: 5
+    factor: 0.5
+    min_lr: 0.00001
+    
+  # Training parameters
+  params:
+    num_epochs: 100
+    early_stopping_patience: 10
+    gradient_clip_val: 1.0
+    accumulate_grad_batches: 1
+    
+  # Loss weights
+  loss_weights:
+    recovery: 1.0
+    pattern_detection: 0.5
+    entropy: 0.3
+    
+  # Validation
+  validation:
+    interval: 1
+    metrics:
+      - recovery_accuracy
+      - pattern_detection_accuracy
+      - entropy_error
+      
+  # Checkpointing
+  checkpointing:
+    save_top_k: 3
+    monitor: "val_recovery_accuracy"
+    mode: "max"
+    
+  # Logging
+  logging:
+    log_interval: 100
+    val_check_interval: 0.5
