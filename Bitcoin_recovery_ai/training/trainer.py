@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Any
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from pathlib import Path
@@ -22,7 +22,7 @@ class ModelTrainer:
     """Trainer for wallet recovery model"""
     
     def __init__(self, 
-                 config: Dict[str, any],
+                 config: Dict[str, Any],
                  device: Optional[torch.device] = None):
         """
         Args:
@@ -67,6 +67,14 @@ class ModelTrainer:
             else:
                 self.logger.warning("WandB logging disabled - package not installed")
                 self.config['use_wandb'] = False
+    def _move_batch_to_device(self, batch: Dict[str, torch.Tensor]) -> Tuple[torch.Tensor, torch.Tensor, Dict[str, torch.Tensor]]:
+        """Efficiently move batch data to device with non-blocking transfers"""
+        wallet_data = batch['data'].to(self.device, non_blocking=True)
+        version_info = batch['version'].to(self.device, non_blocking=True)
+        targets = {k: v.to(self.device, non_blocking=True) for k, v in batch['targets'].items()}
+        return wallet_data, version_info, targets
+                
+
                 
     def _create_model(self) -> nn.Module:
         """Create model based on configuration"""
@@ -139,10 +147,10 @@ class ModelTrainer:
         
         with tqdm(dataloader, desc=f'Epoch {self.current_epoch}') as pbar:
             for batch in pbar:
-                # Move data to device
-                wallet_data = batch['data'].to(self.device)
-                version_info = batch['version'].to(self.device)
-                targets = {k: v.to(self.device) for k, v in batch['targets'].items()}
+                # Move data to device efficiently
+                wallet_data, version_info, targets = self._move_batch_to_device(batch)
+
+
                 
                 # Forward pass
                 self.optimizer.zero_grad()
